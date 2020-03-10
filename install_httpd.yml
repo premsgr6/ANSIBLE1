@@ -1,0 +1,16 @@
+- name: INSTALL HTTPD ON RHEL AND AMZ LINUX
+  hosts: web
+  become: true
+  gather_facts: no
+  tasks:
+  - name: install httpd
+    yum:
+      name: httpd
+      state: present 
+      update_cache: yes
+
+  - name: reload httpd service
+    systemd:
+      name: httpd
+      enabled: yes
+      state: reloaded

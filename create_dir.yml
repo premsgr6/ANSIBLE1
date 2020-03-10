@@ -1,0 +1,12 @@
+- name: creating dir and copying the password file
+  hosts: web
+  #become: true
+  tasks:
+  - name: creating dir
+    file:
+     name: /home/ubuntu/dir1
+     state: directory
+  - name: creating file2 and copying password file
+    copy:
+       src: /etc/passwd
+       dest: /home/ubuntu/dir1/file2 

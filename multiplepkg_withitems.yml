@@ -1,0 +1,20 @@
+# install multiple packages with_items
+- name: this playbook install packages
+  hosts: web
+  become: true
+  gather_facts: no
+  tasks:
+  - name: install package
+    yum:
+     # name: ['git','wget','gzip','make','telnet']
+     name: "{{ item }}"
+     state: installed
+    with_items:
+       - git
+       - wget
+       - gzip
+       - make
+       - telnet
+
+
+

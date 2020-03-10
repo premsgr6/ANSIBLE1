@@ -1,0 +1,20 @@
+#install git and download the git repository
+- name: install git and download git repo
+  hosts: web
+  become: true
+  tasks:
+  - name: install git
+    yum:
+     name: git
+     state: installed
+
+  - name: install git on ubuntu
+    apt:
+      name: git
+      state: present 
+
+
+  - name: Download the git repository
+    git:
+     repo: https://github.com/premsgr6/k8sproject.git
+     dest: /home/ubuntu/tmp/mygit

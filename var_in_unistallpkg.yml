@@ -1,0 +1,10 @@
+- name: install/uninstall s/w packages
+  hosts: web
+  become: true
+  tasks:
+  - name: install/unistall
+    yum:
+     name: "{{a}}"
+     state: "{{b}}"
+     update_cache: "{{c}}"
+  

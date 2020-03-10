@@ -1,0 +1,16 @@
+#this playbook installs java8 , maven package
+- name: install maven
+  hosts: web 
+  become: yes
+  gather_facts: yes
+  tasks:
+  - name: install maven
+    yum:
+     name: java-1.8.0-openjdk
+     state: present
+  - name: install maven
+    get_url: 
+     url: http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.rep
+       sed -i s/\$releasever/6/g /etc/yum.repos.d/epel-apache-maven.repo
+       yum install -y apache-maven
+

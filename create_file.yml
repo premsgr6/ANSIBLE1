@@ -1,0 +1,9 @@
+- name: creating file
+  hosts: web
+  gather_facts: no
+  become: true
+  tasks:
+  - name: creating a file
+    file:
+      path: /home/ubuntu/file1
+      state: absent 

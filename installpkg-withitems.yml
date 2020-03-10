@@ -1,0 +1,16 @@
+- name: installing packages with item
+  hosts: web
+  gather_facts: no
+  become: true
+  tasks:
+  - name: install packges
+    yum:
+     # name: ['git','java','tree','maven']
+      name: "{{item}}"
+      state: present
+      update_cache:
+    with_items:
+      - git
+      - maven
+      - tree
+      - java-1.8.0-openjdk

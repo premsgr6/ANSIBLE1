@@ -1,0 +1,13 @@
+- name: THIS PLAYBOOK IS TO INSTALL PACKAGES
+  hosts: web 
+  gather_facts: no
+  become: true
+  tasks:
+  - name: install git package
+    yum:
+      name: git
+      state: installed
+  - name: install tree package
+    yum:
+      name: tree
+      state: installed

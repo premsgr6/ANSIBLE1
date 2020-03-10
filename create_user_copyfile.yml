@@ -1,0 +1,14 @@
+- name: create user and copying file
+  hosts: all
+  tasks:
+  - name: create user
+    user:
+     name: user1
+     password: 'passsword'
+     home: /home/user1
+     shell: /bin/bash
+
+  - name: copying files to user home dir
+    copy:
+     src: /opt/ansible/index.html
+     dest: /home/user1 

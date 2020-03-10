@@ -1,0 +1,16 @@
+- name: this playbook to install git and clone repo
+  hosts: ubuntu
+  become: true
+  gather_facts: no
+  tasks:
+  - name: install git 
+    apt:
+     name: git-all
+     state: absent 
+     update_cache: yes 
+  - name: clone git repo
+    git:
+     repo: https://github.com/premsgr6/maven.git
+     dest: /home/ubuntu/opt
+
+

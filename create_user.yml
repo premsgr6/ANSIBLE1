@@ -1,0 +1,16 @@
+- name: PLAYBOOK IS TO CREATE USER
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+  - user: 
+    name: john
+    state: present
+
+- hosts: ubuntu
+  gather_facts: no
+  become: true
+  tasks:
+  - user:
+     name: john
+     state: present  

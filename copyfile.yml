@@ -1,0 +1,11 @@
+- name: copying index.html
+  hosts: all
+  become: true
+  tasks:
+  - name: copy a file 
+    copy: 
+     src: /opt/ansible/index.html
+     dest: /home/ubuntu
+     mode: 0600
+     owner: ubuntu
+

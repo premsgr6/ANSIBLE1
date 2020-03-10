@@ -1,0 +1,37 @@
+# thi playbook installpackages , handlers and  copy the file using lineinfile
+- name: install httpd
+  hosts: all
+  become: true
+  # gather_facts: no and wont work on this playbook
+  tasks:
+  - name: install httpd
+    yum:
+     name: httpd
+     state: installed
+    when: ansible_os_family == "RedHat"
+
+  - name: start apahe2
+    service:
+      name: httpd
+      state: started
+    when: ansible_os_family == "RedHat"
+
+  - name: install apache2
+    apt:
+     name: apache2
+     state: present
+    when: ansible_os_family == "Debian"
+
+  - name: start apache2
+    service:
+      name: apache2
+      state: started
+    when: ansible_os_family == "Debian"
+
+  - name: copy index.html
+    copy:
+     content: "WELCOME TO ANSIBLE TRAINING\n"
+     dest: /var/www/html/index.html
+     # mode permissions read and write
+     mode: 0666
+

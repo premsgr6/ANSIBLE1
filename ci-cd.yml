@@ -1,0 +1,35 @@
+- name: configure jenkins on devserver
+  hosts: ubuntu
+  become: true
+  gather_facts: no
+  tasks:
+  - name: install s/w for jenkins
+    apt:
+     name: "{{item}}"
+     state: present
+    with_items:
+     - openjdk-8-jdk
+     - git
+     - maven
+
+  - name: download jenkins.war
+    get_url:
+      url: http://mirrors.jenkins.io/war-stable/latest/jenkins.war
+      dest: /opt
+- name: install tomcat8 on QA & PROD SERVER
+  hosts: web
+  become: true
+  tasks:
+  - name: install tomcat 
+    yum:
+     name: tomcat
+     state: present
+     #with_items:
+     # - tomcat
+         # - tomcat8-admin
+
+  - name: copy tomcat-user.xml file
+    copy:
+     src: ./tomcat-user.xml
+     dest: /etc/tomcat8
+     remote_src: yes

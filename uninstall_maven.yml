@@ -1,0 +1,9 @@
+- name: unsiatll mvn
+  hosts: web
+  become: true
+  tasks:
+  - name: unistall maven
+    yum:
+     name: maven
+     state: absent
+

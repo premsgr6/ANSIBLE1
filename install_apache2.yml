@@ -1,0 +1,14 @@
+- name: install apache2 on ubuntu node
+  hosts: ubuntu
+  become: true
+  tasks:
+  - name: install apache2
+    apt:
+     name: apache2
+     state: present
+     update_cache: yes
+
+  - name: stating apache service
+    service:
+      name: apache2
+      state: started
