@@ -1,0 +1,15 @@
+events {}
+http {
+
+    upstream backend {
+         {% for web in  10.1.1.243 %}
+           server {{web}}:80;
+         {% endfor %}
+    }
+ server {
+   listen 80;
+   location / {
+     proxy_pass  http://backend;
+   }
+ }
+}

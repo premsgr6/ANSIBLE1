@@ -1,0 +1,31 @@
+- hosts: 10.1.1.243 
+  become: true
+  gather_facts: no
+  tasks:
+  - name: Configur Niginx RPM
+    yum: name=http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+  - name: install nginx server
+    yum: 
+       name: nginx
+       state: present
+       enablerepo: nginx
+  - name: start and enable nginx server
+    service:
+       name: nginx
+       state: started
+       enabled: yes
+  - name: install selinux bindings
+    yum:
+      name: libselinux-python
+      state: present
+     
+  - name: copy nginx.conf to the  nginx server
+    template: src=/opt/ansible/nginx.conf.j2 dest=/etc/nginx/nginx.conf
+    notify: restart the server
+  handlers:
+  - name: restart the server
+    service:
+        name: nginx
+        state: restarted
+        enabled: true 
+
